@@ -1,8 +1,24 @@
 {% autoescape None %}
 <html>
     <body>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        function solutionOn()
+        {
+            $("#solution").show();
+        }
+
+        function solutionOff()
+        {
+            $("#solution").hide();
+        }
+    </script>
     {{graph}}
     <form action="" method="post">
+        solution on: <input type="radio" name="solution_check" onClick="solutionOn()">
+        </br>
+        solution off: <input type="radio" name="solution_check" onClick="solutionOff()" checked>
+        </br>
         {% for i in range(9) %}
             {% if data['length'] > i %}
             y{{i+1}} : 
@@ -21,24 +37,26 @@
         <input type="submit" value="그래프 그리기">
     </form>
     
-    <table border="1">
-        <tr>
-            <td>함수</td>
-            <td>index</td>
-            <td>x</td>
-            <td>error</td>
-        </tr>
-        {% for i in range(len(graphLst)) %}
-            {% for j in range(len(graphLst[i].get_solution())) %}
+    <div id="solution" style="display:none">
+        <table border="1">
             <tr>
-                <td>{{graphLst[i].get_name()}}</td>
-                <td>{{j}}</td>
-                <td>{{graphLst[i].get_solution()[j]}}</td>
-                <td>{{graphLst[i].get_error()}}</td>
+                <td>함수</td>
+                <td>index</td>
+                <td>x</td>
+                <td>error</td>
             </tr>
+            {% for i in range(len(graphLst)) %}
+                {% for j in range(len(graphLst[i].get_solution())) %}
+                <tr>
+                    <td>{{graphLst[i].get_name()}}</td>
+                    <td>{{j}}</td>
+                    <td>{{graphLst[i].get_solution()[j]}}</td>
+                    <td>{{graphLst[i].get_error()}}</td>
+                </tr>
+                {% end %}
             {% end %}
-        {% end %}
-    </table>
+        </table>
+    </div>
 
     </body>
 </html>

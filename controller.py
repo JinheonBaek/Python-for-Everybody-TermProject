@@ -8,7 +8,6 @@ class MainHandler(RequestHandler):
     def get(self):
         graphLst = graph.getSample()
         data = {'name': ['y1', 'y2', 'y3'], 'function': ["f = lambda x: x-1", "f = lambda x: x*x-3", "f = lambda x: math.sin(3*x)"], 'xmin': [-3, -3, -3], 'xmax': [3, 3, 3], 'length': 3}
-
         self.render('index.html', graph=graph.draw(graphLst, data['function']), data=data, graphLst=graphLst)
 
     def post(self):

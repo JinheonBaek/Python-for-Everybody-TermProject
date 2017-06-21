@@ -63,7 +63,7 @@ def draw(graphLst, funDatas, isSolve=True):
     return html
 
 def getSample():
-    graphLst = [Graph('y1', lambda x: x, solution=solve.solution_finder(lambda x: x, -3.0, 3.0)), Graph('y2', lambda x: 2*x-3, solution=solve.solution_finder(lambda x: 2*x-3, -3.0, 3.0)), Graph('y3', lambda x: x*x-10, solution=solve.solution_finder(lambda x: 2*x-3, -3.0, 3.0))]
+    graphLst = [Graph('y1', lambda x: x, solution=[1.00000000076294]), Graph('y2', lambda x: 2*x-3, solution=[-1.7320508073806766, 1.7320508073806762]), Graph('y3', lambda x: x*x-10, solution=[-2.09439510269165, -1.047197551345825, 1.047197551345825, 2.0943951026916507])]
     return graphLst
 
 def getGraphList(data):
