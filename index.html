@@ -1,0 +1,25 @@
+{% autoescape None %}
+<html>
+    <body>
+    {{graph}}
+    <form action="" method="post">
+        {% for i in range(9) %}
+            {% if data['length'] > i %}
+            y{{i+1}} : 
+            <input name="y{{i+1}}_function", value="{{data['function'][i]}}">
+            <input name="y{{i+1}}_xmin", value="{{data['xmin'][i]}}">
+            <input name="y{{i+1}}_xmax", value="{{data['xmax'][i]}}">
+            {% else %}
+            y{{i+1}} : 
+            <input name="y{{i+1}}_function", value="">
+            <input name="y{{i+1}}_xmin", value="0">
+            <input name="y{{i+1}}_xmax", value="0">
+            {% end %}
+        </br>
+        {% end %}
+        </br>
+        <input type="submit" value="그래프 그리기">
+    </form>
+    
+    </body>
+</html>
