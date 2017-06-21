@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import mpld3, math, myutil
 import solve
+from exception import MyException
 
 class Graph():
     def __init__(self, name, function, xmin=-5, xmax=5, solution = [], error=1E-9):
@@ -69,6 +70,8 @@ def getSample():
 def getGraphList(data):
     graphLst = []
     for i in range(len(data['name'])):
+        if data['function'][i].find('f') < 0:
+            raise MyException("Some function form have some error ex) f = lambda x: x-1")
         ldict = locals()
         exec(str(data['function'][i]), globals(), ldict)
         f = ldict['f']

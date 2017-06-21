@@ -1,4 +1,5 @@
 from tornado.web import RequestHandler
+from exception import MyException
 import graph
 
 import matplotlib.pyplot as plt
@@ -12,17 +13,18 @@ class MainHandler(RequestHandler):
 
     def post(self):
         data = {'name': [], 'function': [], 'xmin': [], 'xmax': [], 'length': 0}
-
-        for i in range(9):
-            if len(self.get_body_argument('y' + str(i+1) + '_function')) > 0:
-                data['length'] += 1
-                data['name'].append('y' + str(i+1))
-                data['function'].append(self.get_body_argument('y' + str(i+1) + '_function'))
-                data['xmin'].append(self.get_body_argument('y' + str(i+1) + '_xmin'))
-                data['xmax'].append(self.get_body_argument('y' + str(i+1) + '_xmax'))
-
-        graphLst = graph.getGraphList(data)
         try:
-           self.render('index.html', graph=graph.draw(graphLst, data['function']), data=data, graphLst=graphLst)
+            for i in range(9):
+                if len(self.get_body_argument('y' + str(i+1) + '_function')) > 0:
+                    data['length'] += 1
+                    data['name'].append('y' + str(i+1))
+                    data['function'].append(self.get_body_argument('y' + str(i+1) + '_function'))
+                    data['xmin'].append(self.get_body_argument('y' + str(i+1) + '_xmin'))
+                    data['xmax'].append(self.get_body_argument('y' + str(i+1) + '_xmax'))
+
+            graphLst = graph.getGraphList(data)
+            self.render('index.html', graph=graph.draw(graphLst, data['function']), data=data, graphLst=graphLst)
+        except MyException as e:
+            self.render("error.html", mesg=e.val)
         except Exception:
-           self.render('error.html')
+           self.render('error.html', mesg="error")
