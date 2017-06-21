@@ -21,5 +21,24 @@
         <input type="submit" value="그래프 그리기">
     </form>
     
+    <table border="1">
+        <tr>
+            <td>함수</td>
+            <td>index</td>
+            <td>x</td>
+            <td>error</td>
+        </tr>
+        {% for i in range(len(graphLst)) %}
+            {% for j in range(len(graphLst[i].get_solution())) %}
+            <tr>
+                <td>{{graphLst[i].get_name()}}</td>
+                <td>{{j}}</td>
+                <td>{{graphLst[i].get_solution()[j]}}</td>
+                <td>{{graphLst[i].get_error()}}</td>
+            </tr>
+            {% end %}
+        {% end %}
+    </table>
+
     </body>
 </html>
